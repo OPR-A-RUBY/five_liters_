@@ -12,6 +12,10 @@ def control_world
   
 end
 
+def out_hh_b
+  puts $hh_b
+end
+
 #            0        1         2         3
 #            12345678901234567890123456789012 
 alphavit = 'АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЬЫЪЭЮЯ'
@@ -27,14 +31,14 @@ puts alphavit              # DEBUG
 puts arr_b                 # DEBUG
 puts arr_0                 # DEBUG
 
-hh_b = {}                  # Хэш для описания состояний букв
+$hh_b = {}                  # Хэш для описания состояний букв
 arr_b.each do |item|
 
-  hh_b [item] = arr_0
+  $hh_b [item] = arr_0
 
 end
 
-puts hh_b                  # DEBUG
+puts $hh_b                  # DEBUG
  
 c_word = 'ВЕДРО' # Претендент
 target = 'КРЫЛО' # Целевое (искомое) слово - оно программе не известно
@@ -47,3 +51,5 @@ hh_tablo = {'1' => {'Y' => '-', 'N' => []},
 	    '4' => {'Y' => '-', 'N' => []}, 
 	    '5' => {'Y' => '-', 'N' => []}
 	    }
+
+out_hh_b
