@@ -2,7 +2,9 @@
 # Программа угадывания слова из 5 букв приложения Тинькофф
 
 def begin_screen  # ОЧИСТКА ЭКРАНА В КОНСОЛИ - (для Linux)
-
+  puts "Начало выполнения программы"
+  puts "---------------------------"
+  puts
 end
 
 def fill_alphavit  # ЗАПОЛНИТЬ ХЭШ - СОСТОЯНИЯ АЛФАМИТА НУЛЯМИ -> $hh_b[key]=[0,0]
@@ -30,6 +32,7 @@ def control_world
 end
 
 def out_hh_b  # ВЫВОД ХЭШ - СОСТОЯНИЙ АЛФАВИТА
+  puts 'Hash ALPHAVIT viewing:'
   liters = '' 
   notexist = ''
   exist = ''
@@ -38,7 +41,6 @@ def out_hh_b  # ВЫВОД ХЭШ - СОСТОЯНИЙ АЛФАВИТА
     notexist = notexist + value[0].to_s
     exist = exist + value[1].to_s
   end
-  puts 'Hash viewing:'
   puts liters
   puts notexist
   puts exist
@@ -55,14 +57,41 @@ def test_out_hh_b  # ТЕСТИРОВАНИЕ МЕТОДА 'out_hh_b'
 end
 
 def fill_tablo  # ЗАПОЛНИТЬ ХЭШ ТАБЛО "МИНУСАМИ" 
-  $hh_tablo = {'1' => {'Y' => '-', 'N' => '-'},
-	       '2' => {'Y' => '-', 'N' => '-'}, 
-	       '3' => {'Y' => '-', 'N' => '-'}, 
-	       '4' => {'Y' => '-', 'N' => '-'}, 
-	       '5' => {'Y' => '-', 'N' => '-'}
-	      }
+  $hh_tablo = {'1 ' => {'Y' => '- ', 'N' => '- '},
+	       '2 ' => {'Y' => '- ', 'N' => '- '}, 
+	       '3 ' => {'Y' => '- ', 'N' => '- '}, 
+	       '4 ' => {'Y' => '- ', 'N' => '- '}, 
+	       '5 ' => {'Y' => '- ', 'N' => '- '}
+  }
 end 
 
+def out_hh_tablo  # ВЫВОД ХЭШ СОСТОЯНИЯ ТАБЛО
+  puts 'Hash TABLO viewing:'
+  tablo_s = ''
+  puts 'Y + N'
+  puts '-------------'
+  $hh_tablo.each do |key, value|
+    tablo_s = tablo_s + key         #
+    tablo_s = tablo_s + '| '        #
+    tablo_s = tablo_s + value['Y']  #
+    tablo_s = tablo_s + '| '        #
+    tablo_s = tablo_s + value['N']  #
+    puts tablo_s
+    tablo_s = ''
+  end
+end
+
+def test_out_hh_tablo  # ТЕСТИРОВАНИЕ МЕТОДА 'out_hh_tablo'
+  $hh_tablo['1 '] = {'Y'=>'А ', 'N'=>'У Е '}
+  $hh_tablo['2 '] = {'Y'=>'- ', 'N'=>'Д Б П '}
+  $hh_tablo['5 '] = {'Y'=>'П ', 'N'=>'- '}
+  puts $hh_tablo                  # DEBUG
+
+  puts ' '
+  out_hh_tablo
+end
+
+begin_screen
 $hh_b = {}               # Хэш для описания состояний букв АЛФАВИТА
 fill_alphavit            # Наполнить ХЭШ сосотояния алфавита => [0,0]
 test_out_hh_b            # Тестируем вывод ХЕША состояния алфавита в консоль
@@ -71,4 +100,5 @@ c_word = 'ВЕДРО' # Претендент
 target = 'КРЫЛО' # Целевое (искомое) слово - оно программе не известно
 
 $hh_tablo = {}           # Хэш для описания состояний ТАБЛО
-
+fill_tablo               # Наполнить ХЭШ состояния ТАБЛО '-' '-'
+test_out_hh_tablo        # Тестируем вывод ХЕША состояния ТАБЛО в консоль
