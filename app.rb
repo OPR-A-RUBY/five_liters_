@@ -19,10 +19,12 @@ def fill_alphavit  # ЗАПОЛНИТЬ ХЭШ - СОСТОЯНИЯ АЛФАМИ
 			# по букве НЕТ ДАННЫХ = value[0] = value[1] = "-"
   #
   if $debug == true
-    puts 'DEBUG:'                                                            # DEBUG
+    debug_
     puts alphavit                                                            # DEBUG
-    puts arr_b                                                               # DEBUG
-    puts arr_0                                                               # DEBUG
+    print arr_b                                                              # DEBUG
+    puts                                                                     # DEBUG
+    print arr_0                                                              # DEBUG
+    puts                                                                     # DEBUG
   end  
 
   arr_b.each do |item|
@@ -31,7 +33,7 @@ def fill_alphavit  # ЗАПОЛНИТЬ ХЭШ - СОСТОЯНИЯ АЛФАМИ
 end
 
 def out_hh_b  # ВЫВОД ХЭШ - СОСТОЯНИЙ АЛФАВИТА
-  puts 'Hash ALPHAVIT viewing:'
+  puts '___________ ALPHAVIT ___________'
   liters = '' 
   notexist = ''
   exist = ''
@@ -50,7 +52,7 @@ def test_out_hh_b  # ТЕСТИРОВАНИЕ МЕТОДА 'out_hh_b'
   $hh_b['Д'] = [1,0]
   $hh_b['П'] = [0,1]
   
-  puts 'DEBUG:' if $debug == true                                            # DEBUG
+  debug_
   puts $hh_b    if $debug == true                                            # DEBUG
 
   puts ' '
@@ -67,10 +69,10 @@ def fill_tablo  # ЗАПОЛНИТЬ ХЭШ ТАБЛО "МИНУСАМИ"
 end 
 
 def out_hh_tablo  # ВЫВОД ХЭШ СОСТОЯНИЯ ТАБЛО
-  puts 'Hash TABLO viewing:'
+  puts '____ TABLO ____'
   tablo_s = ''
-  puts 'Y + N'
-  puts '-------------'
+  puts '  |Yes| No-o-o'
+  puts '---------------'
   $hh_tablo.each do |key, value|
     tablo_s = tablo_s + key         #
     tablo_s = tablo_s + '| '        #
@@ -86,28 +88,36 @@ def test_out_hh_tablo  # ТЕСТИРОВАНИЕ МЕТОДА 'out_hh_tablo'
   $hh_tablo['1 '] = {'Y'=>'А ', 'N'=>'У Е '}
   $hh_tablo['2 '] = {'Y'=>'- ', 'N'=>'Д Б П '}
   $hh_tablo['5 '] = {'Y'=>'П ', 'N'=>'- '}
-  puts 'DEBUG:'  if $debug == true                                           # DEBUG
+  debug_
   puts $hh_tablo if $debug == true                                           # DEBUG
 
   puts ' '
   out_hh_tablo
 end
 
+def debug_ # ВЫВОД ЗАГОЛОВКА ПЕРЕД ОТЛАДОЧНОЙ ИНФОРМАЦИЕЙ
+  if $debug == true
+    puts                                                                     # DEBUG
+    puts '(!!) DEBUG:'                                                       # DEBUG
+  end  
+end
 
-def control_world 
+def control_world  # ПРИСВОЕНИЕ СЛОВУ РЕЙТИНГА
   
 end
 
 begin_screen
 $debug = false           # Переменная запуска DEBUG строчек кода
-$debug = true
+#$debug = true
+
 $hh_b = {}               # Хэш для описания состояний букв АЛФАВИТА
 fill_alphavit            # Наполнить ХЭШ сосотояния алфавита => [0,0]
 test_out_hh_b            # Тестируем вывод ХЕША состояния алфавита в консоль
+
+$hh_tablo = {}           # Хэш для описания состояний ТАБЛО
+fill_tablo               # Наполнить ХЭШ состояния ТАБЛО {'Y'=>'-', 'N'=>'-'}
+test_out_hh_tablo        # Тестируем вывод ХЕША состояния ТАБЛО в консоль
+
  
 c_word = 'ВЕДРО' # Претендент
 target = 'КРЫЛО' # Целевое (искомое) слово - оно программе не известно
-
-$hh_tablo = {}           # Хэш для описания состояний ТАБЛО
-fill_tablo               # Наполнить ХЭШ состояния ТАБЛО '-' '-'
-test_out_hh_tablo        # Тестируем вывод ХЕША состояния ТАБЛО в консоль
