@@ -4,7 +4,6 @@
 def begin_screen  # ОЧИСТКА ЭКРАНА В КОНСОЛИ - (для Linux)
   puts "Начало выполнения программы"
   puts "---------------------------"
-  puts
 end
 
 def fill_alphavit  # ЗАПОЛНИТЬ ХЭШ - СОСТОЯНИЯ АЛФАМИТА НУЛЯМИ -> $hh_b[key]=[0,0]
@@ -18,17 +17,17 @@ def fill_alphavit  # ЗАПОЛНИТЬ ХЭШ - СОСТОЯНИЯ АЛФАМИ
 			# буква в слове ОТСУТСТВУЕТ  = value[0] = "N"  "-"
 			# буква в слове ПРИСУТСТВУЕТ = value[1] = "-"  "Y"
 			# по букве НЕТ ДАННЫХ = value[0] = value[1] = "-"
-  #puts alphavit              # DEBUG
-  #puts arr_b                 # DEBUG
-  #puts arr_0                 # DEBUG
+  #
+  if $debug == true
+    puts 'DEBUG:'                                                            # DEBUG
+    puts alphavit                                                            # DEBUG
+    puts arr_b                                                               # DEBUG
+    puts arr_0                                                               # DEBUG
+  end  
 
   arr_b.each do |item|
     $hh_b [item] = arr_0      # Заполняем хэш => [0,0] - нет данных
   end
-end
-
-def control_world 
-  
 end
 
 def out_hh_b  # ВЫВОД ХЭШ - СОСТОЯНИЙ АЛФАВИТА
@@ -50,7 +49,9 @@ def test_out_hh_b  # ТЕСТИРОВАНИЕ МЕТОДА 'out_hh_b'
   $hh_b['К'] = [0,1]
   $hh_b['Д'] = [1,0]
   $hh_b['П'] = [0,1]
-  puts $hh_b                  # DEBUG
+  
+  puts 'DEBUG:' if $debug == true                                            # DEBUG
+  puts $hh_b    if $debug == true                                            # DEBUG
 
   puts ' '
   out_hh_b
@@ -85,13 +86,21 @@ def test_out_hh_tablo  # ТЕСТИРОВАНИЕ МЕТОДА 'out_hh_tablo'
   $hh_tablo['1 '] = {'Y'=>'А ', 'N'=>'У Е '}
   $hh_tablo['2 '] = {'Y'=>'- ', 'N'=>'Д Б П '}
   $hh_tablo['5 '] = {'Y'=>'П ', 'N'=>'- '}
-  puts $hh_tablo                  # DEBUG
+  puts 'DEBUG:'  if $debug == true                                           # DEBUG
+  puts $hh_tablo if $debug == true                                           # DEBUG
 
   puts ' '
   out_hh_tablo
 end
 
+
+def control_world 
+  
+end
+
 begin_screen
+$debug = false           # Переменная запуска DEBUG строчек кода
+$debug = true
 $hh_b = {}               # Хэш для описания состояний букв АЛФАВИТА
 fill_alphavit            # Наполнить ХЭШ сосотояния алфавита => [0,0]
 test_out_hh_b            # Тестируем вывод ХЕША состояния алфавита в консоль
